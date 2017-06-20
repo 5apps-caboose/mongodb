@@ -27,7 +27,9 @@ default['mongodb']['config']['mongod']['storage']['dbPath'] = case node['platfor
                                                                 '/var/lib/mongodb'
                                                               end
 
-default['mongodb']['config']['mongod']['storage']['engine'] = 'wiredTiger'
+# Disable for now, it's not supported in MongoDB 2.6 and Chef is doing nested
+# merges on attributes
+# default['mongodb']['config']['mongod']['storage']['engine'] = 'wiredTiger'
 
 default['mongodb']['config']['mongod']['replication']['oplogSizeMB'] = nil
 default['mongodb']['config']['mongod']['replication']['replSetName'] = nil
