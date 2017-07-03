@@ -9,9 +9,7 @@ include_attribute 'sc-mongodb::default'
 default['mongodb']['config']['mongod']['net']['port'] = 27017
 default['mongodb']['config']['mongod']['net']['bindIp'] = '0.0.0.0'
 
-default['mongodb']['config']['mongod']['systemLog']['destination'] = 'file'
-default['mongodb']['config']['mongod']['systemLog']['logAppend'] = true
-default['mongodb']['config']['mongod']['systemLog']['path'] = '/var/log/mongodb/mongod.log'
+default['mongodb']['config']['mongod']['systemLog']['destination'] = 'syslog'
 
 case node['platform_family']
 when 'rhel', 'fedora'
