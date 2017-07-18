@@ -40,12 +40,19 @@ case node['platform_family']
 when 'debian'
   # Ubuntu: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
   # Debian: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/
+  gpg_key = if package_version_major >= 3.4
+              'BC711F9BA15703C6'
+            elsif package_version_major >= 3.2
+              'EA312927'
+            else
+              '7F0CEB10'
+            end
   apt_repository 'mongodb' do
     uri node['mongodb']['repo']
     distribution "#{node['lsb']['codename']}/mongodb-org/#{package_version_major}"
     components node['platform'] == 'ubuntu' ? ['multiverse'] : ['main']
     keyserver 'hkp://keyserver.ubuntu.com:80'
-    key package_version_major >= 3.2 ? 'EA312927' : '7F0CEB10'
+    key gpg_key
   end
 when 'amazon', 'fedora', 'rhel'
   # RHEL: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/
